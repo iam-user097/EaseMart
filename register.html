@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EaseMart - Register</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0b0b1a, #1a1a40);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 340px;
+      color: #fff;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .container h2 {
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      outline: none;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    input {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    input:hover {
+      border-color: #00ffcc;
+      box-shadow: 0 5px 10px rgba(0,255,255,0.6);
+    }
+    input::placeholder {
+      color: #bbb;
+    }
+    button {
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 5px 10px rgba(0,255,255,0.6);
+    }
+    p {
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register</h2>
+    <form id="registerForm">
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button type="submit">Register</button>
+  <p>Already have an account? <a href="login.html">Login</a></p>
+</form>
+
+<script>
+const form = document.getElementById('registerForm');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  
+  if(!username || !password){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  
+  // Check if username already exists
+  if(users.some(u => u.username === username)){
+    alert("Username already taken!");
+    return;
+  }
+
+  // Save new user
+  users.push({ username, password });
+  localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+  // Store username for autofill on login page
+  localStorage.setItem('lastRegisteredUsername', username);
+
+  alert("Registration successful!");
+  window.location.href = "login.html";
+});
+</script>
+</body>
+</html>

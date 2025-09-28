@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Deals</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0b0b1a;
+        color: white;
+    }
+    
+    /* Header Styling */
+    header {
+        background: #1a1a2e;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    header h2 {
+        font-size: 1.5rem;
+        color: #00ffcc;
+    }
+    nav a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    nav a:hover {
+        color: #00ffcc;
+    }
+
+    .content-section {
+        padding: 40px 20px;
+        min-height: 70vh;
+        box-sizing: border-box;
+    }
+    .section-title {
+        color: #00ffcc;
+        border-bottom: 2px solid #1a1a2e;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    /* Deals Grid Styling */
+    .deals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+    .deal-product {
+        background: #2b1a1a;
+        padding: 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+        border: 2px solid #ff5555;
+        text-align: center;
+        position: relative;
+    }
+    .deal-product:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 85, 85, 0.3);
+    }
+    .deal-product img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    .deal-product h4 {
+        margin: 10px 0 5px;
+        color: #ffaa55;
+    }
+    .deal-product p {
+        color: #ccc;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+    .deal-price {
+        font-size: 1.5rem;
+        color: #00ffcc;
+        margin: 5px 0 15px;
+    }
+    .deal-price del {
+        color: #ff5555;
+        font-size: 0.9em;
+        margin-right: 10px;
+    }
+    .deal-product button { 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 5px; 
+        background: #ff5555; 
+        color: white; 
+        font-weight: bold; 
+        cursor: pointer; 
+        transition: all 0.3s ease;
+    }
+    .deal-product button:hover { 
+        transform: translateY(5px);
+        box-shadow: 0 8px 20px rgba(0, 229, 255, 0.745);
+        background: aquamarine;
+        color: black;
+    }
+
+    /* Countdown Timer */
+    .countdown {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #ffaa55;
+        font-weight: bold;
+    }
+
+    /* Partner Section */
+    .partner-section {
+        text-align: center;
+        padding: 40px 0;
+        border-top: 1px solid #333;
+    }
+    .partner-section h3 {
+        color: #00ffcc;
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+    }
+    .partner-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+    .logo-container {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+        filter: grayscale(0.2);
+        transition: filter 0.3s, transform 0.3s;
+    }
+    .logo-container:hover {
+        filter: grayscale(0);
+        transform: scale(1.05);
+        box-shadow: 2px 5px 10px rgb(255, 21, 21);
+    }
+    .partner-logos img {
+        max-width: 80%;
+        max-height: 80%;
+        height: auto;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Best Deals</h1>
+    <nav>
+      <a href="shop.html">Home</a>
+      <a href="categories.html">Categories</a>
+      <a href="deals.html" style="color: #00ffcc; border-bottom: 2px solid #00ffcc;">Deals</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<div class="content-section">
+<h2 class="section-title">✨ Unmissable Flash Deals! ⏰</h2>
+
+<div class="deals-grid">
+    <div class="deal-product" data-deal-end="2025-09-28T16:00:00">
+        <img src="https://rvrsp.in/wp-content/uploads/2024/09/professional-dslr-camera-with-zoom-lens.jpg" alt="Camera">
+        <h4>Pro DSLR Camera Bundle</h4>
+        <div class="deal-price"><del>rs 40000</del> rs 20000</div>
+        <div class="countdown">Time Left: <span class="time"></span></div>
+        <button onclick="window.location.href='shop.html'">Grab Deal</button>
+    </div>
+
+    <div class="deal-product" data-deal-end="2025-09-28T15:30:00">
+        <img src="https://images.bauerhosting.com/legacy/media/5f85/38e5/d2da/aa32/0f1e/cb5b/best-laptops-under-1000.png?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80" alt="Laptop">
+        <h4>Lightweight Business Laptop</h4>
+        <div class="deal-price"><del>rs 75000</del> rs 52500</div>
+        <div class="countdown">Time Left: <span class="time"></span></div>
+        <button onclick="window.location.href='shop.html'">Buy Now</button>
+    </div>
+
+    <div class="deal-product" data-deal-end="2025-09-28T20:00:00">
+        <img src="https://images.hindustantimes.com/img/2024/08/20/1600x900/premium_smartwatches_for_men_buying_guide_1724159102404_1724159144983.jpg" alt="Watch">
+        <h4>Premium Smartwatch Series 6</h4>
+        <div class="deal-price"><del>rs 18000</del> rs 12999</div>
+        <div class="countdown">Time Left: <span class="time"></span></div>
+        <button onclick="window.location.href='shop.html'">Add to Cart</button>
+    </div>
+
+     <div class="deal-product" data-deal-end="2025-09-30T12:00:00">
+        <img src="https://images.samsung.com/is/image/samsung/p6pim/de/2501/feature/de-feature-galaxy-s25-ultra-s938-544875096?$FB_TYPE_A_MO_JPG$" alt="Mobile">
+        <h4>Premium Mobile Advance Deal</h4>
+        <div class="deal-price"><del>rs 22000</del> rs 19990</div>
+        <div class="countdown">Time Left: <span class="time"></span></div>
+        <button onclick="window.location.href='shop.html'">Add to Cart</button>
+    </div>
+</div>
+
+<div class="partner-section">
+    <h3>Trusted Deals from Our Partners</h3>
+    <div class="partner-logos">
+        <a href="https://www.amazon.com" target="_blank" class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon">
+        </a>
+        <a href="https://www.google.com" target="_blank" class="logo-container">
+            <img src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/master/pass/google-logo.jpg" alt="Google">
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="LinkedIn">
+        </a>
+        <a href="https://www.meesho.com" target="_blank" class="logo-container">
+            <img src="https://static.vecteezy.com/system/resources/previews/050/816/807/non_2x/meesho-transparent-icon-free-png.png" alt="Meesho">
+        </a>
+        <a href="https://www.flipkart.com" target="_blank" class="logo-container">
+            <img src="https://www.citypng.com/public/uploads/preview/hd-flipkart-round-logo-icon-transparent-png-701751694966204grvmunpzzf.png?v=2025062017" alt="Flipkart">
+        </a>
+    </div>
+</div>
+</div>
+
+<script>
+function updateCountdown() {
+    const deals = document.querySelectorAll('.deal-product');
+    const now = new Date().getTime();
+
+    deals.forEach(deal => {
+        const endTime = new Date(deal.getAttribute('data-deal-end')).getTime();
+        const diff = endTime - now;
+
+        const timeEl = deal.querySelector('.time');
+        const button = deal.querySelector('button');
+
+        if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            timeEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else {
+            timeEl.textContent = 'Deal Over';
+            button.disabled = true;
+            button.style.background = '#555';
+            button.style.cursor = 'not-allowed';
+        }
+    });
+}
+
+// Update every second
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+</body>
+</html>

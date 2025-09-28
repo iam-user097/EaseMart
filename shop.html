@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EaseMart - Shop</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0b0b1a;
+      color: white;
+    }
+
+    header {
+      background: #1a1a2e;
+      padding: 15px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .top-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #00ffcc;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+    }
+
+    header h2 {
+      color: #00ffcc;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+      background: linear-gradient(
+        135deg,
+        #00ffcc 20%,
+        #000 40%,
+        #000 60%,
+        #00ffcc 80%,
+        #00ffcc 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
+    }
+
+    @keyframes shine {
+      from { background-position: 100% center; }
+      to { background-position: -100% center; }
+    }
+
+    /* Hero slider */
+    .hero {
+      position: relative;
+      height: 350px;
+      overflow: hidden;
+      margin: 20px auto;
+      width: 90%;
+      border-radius: 8px;
+    }
+
+    .slides {
+      display: none;
+      position: relative;
+      height: 100%;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* Slider arrows */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.3s;
+      border-radius: 50%;
+      user-select: none;
+      background: rgba(0,0,0,0.4);
+    }
+    .next { right: 15px; }
+    .prev { left: 15px; }
+    .prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+
+    /* Main layout */
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      width: 90%;
+      margin: 0 auto 40px;
+      flex-wrap: wrap;
+    }
+
+    .sidebar {
+      flex: 1 1 20%;
+      background: #111;
+      padding: 15px;
+      border-radius: 8px;
+      min-width: 180px;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #ccc;
+    }
+
+    .sidebar ul li a:hover {
+      color: #00ffcc;
+    }
+
+    .products {
+      flex: 1 1 75%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: #1c1c2b;
+      padding: 15px;
+      border-radius: 8px;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .product h4 {
+      margin: 10px 0 5px;
+      text-align: center;
+    }
+
+    .product p {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .product button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #00ffcc;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .product button:hover {
+      background: #00bbaa;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar, .products {
+        width: 100%;
+      }
+      .hero { height: 250px; }
+      .slides img { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <h1>EaseMart</h1>
+      <nav>
+        <a href="shop.html" style="color: #00ffcc; border-bottom: 2px solid #00ffcc;">Home</a>
+        <a href="categories.html">Categories</a>
+        <a href="deals.html">Deals</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+    <h2>Welcome To EaseMart!<br>Great Shop, Great Vibes.</h2>
+  </header>
+
+  <!-- Hero Slider -->
+  <section class="hero">
+    <div class="slides fade">
+      <img src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvdHAyMDMtMzkzLXRlY2hpLWJsb2diYW5uZXItMTAtcHMta21rYjc1ZWYuanBn.jpg" alt="Fashion Sale">
+      <div class="caption">🔥 Big Fashion Sale is Live!</div>
+    </div>
+    <div class="slides fade">
+      <img src="https://img.pikbest.com/wp/202405/responsive-website-3d-render-design-with-a-flying-laptop-mobile-and-tablet-for-building-websites_9828623.jpg!w700wp" alt="Electronics Deals">
+      <div class="caption">⚡ Mega Electronics Discount</div>
+    </div>
+    <div class="slides fade">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1920" alt="Lifestyle Shopping">
+      <div class="caption">🛒 Shop the Best Lifestyle Products</div>
+    </div>
+    <div class="slides fade">
+      <img src="https://t4.ftcdn.net/jpg/06/64/10/31/360_F_664103119_L2HYNKMBjXhw7rzchBSy9upJCIslwByO.jpg" alt="Amazing Deals">
+      <div class="caption">🤝 Try Amazing Items with Amazing Deals</div>
+    </div>
+
+    <!-- Slider Arrows -->
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#">Electronics</a></li>
+        <li><a href="#">Fashion</a></li>
+        <li><a href="#">Home & Kitchen</a></li>
+        <li><a href="#">Sports</a></li>
+        <li><a href="#">Books</a></li>
+      </ul>
+    </aside>
+
+    <!-- Products Grid -->
+    <section class="products">
+      <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-FkrCNt4RnAqJrTmmiyfQFzG8MSC7vTyhcw&s" alt="Blender">
+        <h4>High-Speed Blender</h4>
+        <p>rs 9999</p>
+        <button onclick="addToCart('High-Speed Blender', 9999, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-FkrCNt4RnAqJrTmmiyfQFzG8MSC7vTyhcw&s')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61Iw0g8zYYL._UF1000,1000_QL80_.jpg" alt="Watch">
+        <h4>Smart Watch</h4>
+        <p>rs 14999</p>
+        <button onclick="addToCart('Smart Watch', 14999, 'https://m.media-amazon.com/images/I/61Iw0g8zYYL._UF1000,1000_QL80_.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.campusshoes.com/cdn/shop/files/OG-30_22G-1249_BLU.BELL_WHT_7.webp?v=1758277054" alt="Sneakers">
+        <h4>Stylish Sneakers</h4>
+        <p>rs 2999</p>
+        <button onclick="addToCart('Sneakers', 2999, 'https://www.campusshoes.com/cdn/shop/files/OG-30_22G-1249_BLU.BELL_WHT_7.webp?v=1758277054')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://jarrods.tech/wp-content/uploads/2023/12/asus-rog-zephyrus-m16-2023-gaming-laptop-1024x576.jpg" alt="Laptop">
+        <h4>Gaming Laptop</h4>
+        <p>rs 78000</p>
+        <button onclick="addToCart('Laptop', 78000, 'https://jarrods.tech/wp-content/uploads/2023/12/asus-rog-zephyrus-m16-2023-gaming-laptop-1024x576.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Rockerz_650_pp_renders_main_banner.124.png?v=1740735495" alt="Headphones">
+        <h4>Wireless Headphones</h4>
+        <p>rs 1200</p>
+        <button onclick="addToCart('Boat Headphones', 1200, 'https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Rockerz_650_pp_renders_main_banner.124.png?v=1740735495')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/91qVLIj62WL._UY1100_.jpg" alt="Backpack">
+        <h4>Travel Backpack</h4>
+        <p>rs 3500</p>
+        <button onclick="addToCart('Backpack', 3500, 'https://m.media-amazon.com/images/I/91qVLIj62WL._UY1100_.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://i5-richmedia.walmartimages.com/asr-rm/733d8ac1-ab51-414a-bdc2-d5062de22054_video_testsuccessvideo.jpg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Smartphone">
+        <h4>Reno13 PRo 5G</h4>
+        <p>rs 21990</p> 
+        <button onclick="addToCart('Reno13 PRo 5G', 21990, 'https://i5-richmedia.walmartimages.com/asr-rm/733d8ac1-ab51-414a-bdc2-d5062de22054_video_testsuccessvideo.jpg?odnHeight=768&odnWidth=768&odnBg=FFFFFF')">Add to Cart</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("slides");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex-1].style.display = "block";  
+    setTimeout(showSlides, 5000);
+  }
+
+  function plusSlides(n) {
+    slideIndex += n-1;
+    showSlides();
+  }
+
+  function addToCart(name, price, img) {
+    // Check if user is logged in
+    let isLoggedIn = localStorage.getItem("userLoggedIn"); // "true" or "false"
+    if (isLoggedIn !== "true") {
+      alert("Please login to add items to your cart!");
+      window.location.href = "login.html"; // redirect to login page
+      return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name, price, img });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(name + " added to cart!");
+    window.location.href = "cart.html";
+  }
+  </script>
+</body>
+</html>
